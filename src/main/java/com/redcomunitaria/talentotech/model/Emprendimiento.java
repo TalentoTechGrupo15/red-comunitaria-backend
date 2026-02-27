@@ -28,7 +28,7 @@ public class Emprendimiento {
 
     @ManyToOne
     @JoinColumn(name = "idEtapa", nullable = false)
-    private Etapa idEtapa;
+    private Etapa etapa;
 
 
     @ManyToOne
