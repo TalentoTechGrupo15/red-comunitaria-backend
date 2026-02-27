@@ -35,6 +35,10 @@ public class Usuario {
     @Column(nullable = false)
     private String clave;
 
+    @ManyToOne
+    @JoinColumn(name = "idRol", nullable = false)
+    private Rol rol;
+
 
     @ManyToOne
     @JoinColumn(name = "idEquipo", nullable = false)
