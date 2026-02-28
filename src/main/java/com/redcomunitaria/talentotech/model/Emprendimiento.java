@@ -10,6 +10,7 @@ public class Emprendimiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_emprendimiento")
     private Long idEmprendimiento;
 
     @Column(nullable = false, unique = true)
@@ -27,20 +28,21 @@ public class Emprendimiento {
 
 
     @ManyToOne
-    @JoinColumn(name = "idEtapa", nullable = false)
+    @JoinColumn(name = "id_etapa", nullable = false)
     private Etapa etapa;
 
 
     @ManyToOne
-    @JoinColumn(name = "idRegion", nullable = false)
+    @JoinColumn(name = "id_region", nullable = false)
     private Region region;
 
 
     @ManyToOne
-    @JoinColumn(name = "idTipoEmprendimiento", nullable = false)
+    @JoinColumn(name = "id_tipo_emprendimiento", nullable = false)
     private TipoEmprendimiento tipoEmprendimiento;
 
-    @OneToOne(mappedBy = "emprendimiento")
+    @OneToOne
+    @JoinColumn(name = "id_equipo")
     private Equipo equipo;
 
 

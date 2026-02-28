@@ -11,6 +11,7 @@ import java.util.List;
 public class Rol {
 
     @Id
+    @Column(name = "id_rol")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRol;
 
@@ -18,7 +19,7 @@ public class Rol {
     private String nombre;
 
 
-    @JsonIgnore
-    @OneToMany (mappedBy = "rol")
-    private List<Usuario> usuarios;
+//    @JsonIgnore
+//    @OneToMany (mappedBy = "rol")
+//    private List<Usuario> usuarios;
 }

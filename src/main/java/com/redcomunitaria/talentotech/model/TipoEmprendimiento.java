@@ -11,6 +11,7 @@ import java.util.List;
 public class TipoEmprendimiento {
 
     @Id
+    @Column(name = "id_tipo_emprendimiento")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTipoEmprendimiento;
 
@@ -20,7 +21,7 @@ public class TipoEmprendimiento {
     @Column(nullable = false)
     private String descripcion;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "tipoEmprendimiento", cascade = CascadeType.ALL)
-    private List<Emprendimiento> emprendimientos;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "tipoEmprendimiento", cascade = CascadeType.ALL)
+//    private List<Emprendimiento> emprendimientos;
 }

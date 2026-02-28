@@ -12,6 +12,7 @@ public class Equipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_equipo")
     private Long idEquipo;
 
     @Column(nullable = false, unique = true)
@@ -21,13 +22,12 @@ public class Equipo {
     private String descripcion;
 
 
-    @OneToOne
-    @JoinColumn(name = "idEmprendimiento", nullable = false)
+    @OneToOne(mappedBy = "equipo")
     private Emprendimiento emprendimiento;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "equipo")
-    private List<Usuario> usuarios;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "equipo")
+//    private List<Usuario> usuarios;
 
 
 

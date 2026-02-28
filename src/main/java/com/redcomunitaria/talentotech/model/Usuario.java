@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class Usuario {
 
     @Id
+    @Column(name = "id_usuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
@@ -35,13 +36,13 @@ public class Usuario {
     @Column(nullable = false)
     private String clave;
 
+
     @ManyToOne
-    @JoinColumn(name = "idRol", nullable = false)
+    @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;
 
-
     @ManyToOne
-    @JoinColumn(name = "idEquipo", nullable = false)
+    @JoinColumn(name = "id_equipo", nullable = false)
     private Equipo equipo;
 
 }

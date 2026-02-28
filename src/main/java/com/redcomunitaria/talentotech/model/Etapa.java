@@ -10,13 +10,14 @@ import java.util.List;
 public class Etapa {
 
     @Id
+    @Column(name = "id_etapa")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEtapa;
 
     @Column(nullable = false, unique = true)
     private String nombre;
 
-    @JsonIgnore
-    @OneToMany (mappedBy = "etapa", cascade = CascadeType.ALL)
-    private List<Emprendimiento> emprendimientos;
+//    @JsonIgnore
+//    @OneToMany (mappedBy = "etapa", cascade = CascadeType.ALL)
+//    private List<Emprendimiento> emprendimientos;
 }

@@ -8,13 +8,14 @@ import java.util.List;
 @Table(name = "pais")
 public class Pais {
     @Id
+    @Column(name = "id_pais")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPais;
 
     @Column(nullable = false, unique = true)
     private String nombre;
 
-    @OneToMany(mappedBy = "pais", cascade = CascadeType.ALL)
-    private List<Region> regiones;
+//    @OneToMany(mappedBy = "pais", cascade = CascadeType.ALL)
+//    private List<Region> regiones;
 
 }

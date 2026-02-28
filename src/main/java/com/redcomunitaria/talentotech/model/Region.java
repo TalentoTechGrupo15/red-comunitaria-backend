@@ -10,6 +10,7 @@ import java.util.List;
 public class Region {
 
     @Id
+    @Column(name= "id_region")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRegion;
 
@@ -18,11 +19,11 @@ public class Region {
 
 
     @ManyToOne
-    @JoinColumn(name = "idPais", nullable = false)
+    @JoinColumn(name = "id_pais", nullable = false)
     private Pais pais;
 
-    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
-    private List<Emprendimiento> emprendimientos;
+//    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+//    private List<Emprendimiento> emprendimientos;
 
 
 
