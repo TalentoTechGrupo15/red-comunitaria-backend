@@ -50,7 +50,7 @@ public class Emprendimiento {
     private TipoEmprendimiento tipoEmprendimiento;
 
     @OneToOne
-    @JoinColumn(name = "id_equipo")
+    @JoinColumn(name = "id_equipo", nullable = false)
     private Equipo equipo;
 
 

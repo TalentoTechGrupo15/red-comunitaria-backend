@@ -1,14 +1,12 @@
 package com.redcomunitaria.talentotech.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Table(name = "equipo")
@@ -29,8 +27,7 @@ public class Equipo {
     @Column(nullable = false)
     private String descripcion;
 
-
-    @OneToOne(mappedBy = "equipo")
+    @OneToOne(mappedBy = "equipo", optional = true)
     private Emprendimiento emprendimiento;
 
 //    @JsonIgnore

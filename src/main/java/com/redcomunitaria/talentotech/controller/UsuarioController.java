@@ -1,6 +1,8 @@
 package com.redcomunitaria.talentotech.controller;
 
 import com.redcomunitaria.talentotech.dto.UsuarioDTO;
+import com.redcomunitaria.talentotech.dto.EquipoDTO;
+import com.redcomunitaria.talentotech.model.Equipo;
 import com.redcomunitaria.talentotech.model.Usuario;
 import com.redcomunitaria.talentotech.service.UsuarioService;
 
@@ -24,5 +26,11 @@ public class UsuarioController {
     public ResponseEntity<Usuario> crearUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         Usuario us = usuarioService.crearUsuario(usuarioDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(us);
+    }
+
+    @PostMapping("crear_equipo")
+    public ResponseEntity<Equipo> crearEquipo(@RequestBody EquipoDTO equipoDTO){
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.crearEquipo(equipoDTO));
+
     }
 }

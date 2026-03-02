@@ -1,15 +1,21 @@
 package com.redcomunitaria.talentotech.service;
 
+import com.redcomunitaria.talentotech.dto.EquipoDTO;
 import com.redcomunitaria.talentotech.dto.UsuarioDTO;
 import com.redcomunitaria.talentotech.exception.CedulaYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.CorreoYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.UsuarioYaExisteExcepcion;
+import com.redcomunitaria.talentotech.exception.UsuarioYaTieneEquipoExcepcion;
+import com.redcomunitaria.talentotech.model.Equipo;
 import com.redcomunitaria.talentotech.model.Rol;
 import com.redcomunitaria.talentotech.model.Usuario;
 import com.redcomunitaria.talentotech.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -18,13 +24,14 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final RolService rolService;
+    private final EquipoService equipoService;
 
 
 
     public Usuario crearUsuario(UsuarioDTO usuarioDTO) {
 
         if(usuarioRepository.existsByUsuario(usuarioDTO.getUsuario())){
-            throw new UsuarioYaExisteExcepcion("El nombre de usuarioDTO ya existe");
+            throw new UsuarioYaExisteExcepcion("El nombre de usuario ya existe");
         }
         if(usuarioRepository.existsByCorreo(usuarioDTO.getCorreo())){
             throw new CorreoYaExisteExcepcion("El correo ya existe");
@@ -48,7 +55,43 @@ public class UsuarioService {
 
 
         return usuarioRepository.save(nuevoUsuario);
-        
-      
     }
+
+
+
+
+    public Equipo crearEquipo(EquipoDTO equipoDTO) {
+
+        List<Usuario> integrantes = new ArrayList<>();
+
+        equipoDTO.getIntegrantes().forEach(nombreDeUsuario ->{
+            if(!usuarioRepository.existsByUsuario(nombreDeUsuario)){
+                throw new UsuarioYaExisteExcepcion("El siguiente nombre de usuario no existe: " + nombreDeUsuario);
+            }
+
+            Usuario integrante = usuarioRepository.findByUsuario(nombreDeUsuario);
+            if(integrante.getEquipo() != null){
+                throw new UsuarioYaTieneEquipoExcepcion("El siguiente usuario ya pertenece a un equipo: " + nombreDeUsuario);
+            }
+            integrantes.add(integrante);
+        });
+
+
+        Equipo nuevoEquipo = new Equipo();
+        nuevoEquipo.setNombre(equipoDTO.getNombre());
+        nuevoEquipo.setDescripcion(equipoDTO.getDescripcion());
+
+        Equipo equipoCreado = equipoService.crearEquipo(nuevoEquipo);
+
+        integrantes.forEach(integranteEquipo ->{
+            integranteEquipo.setEquipo(equipoCreado);
+            usuarioRepository.save(integranteEquipo);
+        });
+
+        return equipoCreado;
+
+
+
+    }
+
 }
