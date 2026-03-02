@@ -2,9 +2,18 @@ package com.redcomunitaria.talentotech.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "usuario")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Usuario {
 
     @Id
@@ -18,7 +27,7 @@ public class Usuario {
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Integer cedula;
 
     @Column(nullable = false, unique = true)
@@ -42,7 +51,7 @@ public class Usuario {
     private Rol rol;
 
     @ManyToOne
-    @JoinColumn(name = "id_equipo", nullable = false)
+    @JoinColumn(name = "id_equipo", nullable = true)
     private Equipo equipo;
 
 }
