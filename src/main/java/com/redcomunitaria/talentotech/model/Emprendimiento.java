@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "empredimiento")
+@Table(name = "emprendimiento")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,7 +27,7 @@ public class Emprendimiento {
     @Column(nullable = false)
     private String descripcion;
 
-    @Column(nullable = true)
+
     private Date year;
 
     @Column(nullable = false)
