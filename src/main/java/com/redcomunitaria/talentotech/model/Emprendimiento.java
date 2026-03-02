@@ -1,5 +1,6 @@
 package com.redcomunitaria.talentotech.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,6 +51,7 @@ public class Emprendimiento {
     private TipoEmprendimiento tipoEmprendimiento;
 
     @OneToOne
+    @JsonManagedReference
     @JoinColumn(name = "id_equipo", nullable = false)
     private Equipo equipo;
 

@@ -20,5 +20,10 @@ public class EquipoService {
         return equipoRepository.save(nuevoEquipo);
     }
 
+    public Equipo buscarEquipoPorId(Long idEquipo){
+        return equipoRepository.findById(idEquipo)
+                .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
+    }
+
 
 }

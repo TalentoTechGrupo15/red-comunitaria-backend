@@ -1,7 +1,15 @@
 package com.redcomunitaria.talentotech.model;
 
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +36,7 @@ public class Equipo {
     private String descripcion;
 
     @OneToOne(mappedBy = "equipo", optional = true)
+    @JsonBackReference
     private Emprendimiento emprendimiento;
 
 //    @JsonIgnore

@@ -1,16 +1,26 @@
 package com.redcomunitaria.talentotech.controller;
 
+import com.redcomunitaria.talentotech.dto.EmprendimientoDTO;
+import com.redcomunitaria.talentotech.model.Emprendimiento;
 import com.redcomunitaria.talentotech.service.EmprendimientoService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/emprendimiento")
+@AllArgsConstructor
 public class EmprendimientoController {
 
     private final EmprendimientoService emprendimientoService;
 
-    public EmprendimientoController(EmprendimientoService emprendimientoService) {
-        this.emprendimientoService = emprendimientoService;
+    @PostMapping("/crear_emprendimiento")
+    public ResponseEntity<Emprendimiento> crearEmprendimiento(@RequestBody EmprendimientoDTO emprendimientoDTO){
+        Emprendimiento emp = emprendimientoService.crearEmprendimiento(emprendimientoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(emp);
     }
 }
