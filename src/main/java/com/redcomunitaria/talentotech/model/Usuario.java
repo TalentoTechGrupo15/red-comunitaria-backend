@@ -51,7 +51,7 @@ public class Usuario {
     private Rol rol;
 
     @ManyToOne
-    @JoinColumn(name = "id_equipo", nullable = true)
+    @JoinColumn(name = "id_equipo")
     private Equipo equipo;
 
 }
