@@ -20,14 +20,15 @@ public class EmprendimientoService {
 
 
 
-    /* AGREGAR EXCEPCION SI EL NOMBRE DEL EMPRENDIMIENTO YA EXISTE */
+
     public Emprendimiento crearEmprendimiento(EmprendimientoDTO emprendimientoDTO) {
 
-        Emprendimiento nuevoEmprendimiento = new Emprendimiento();
-        nuevoEmprendimiento.setNombre(emprendimientoDTO.getNombre());
-        nuevoEmprendimiento.setDescripcion(emprendimientoDTO.getDescripcion());
-        nuevoEmprendimiento.setYear(emprendimientoDTO.getYear());
-        nuevoEmprendimiento.setInversion(emprendimientoDTO.getInversion());
+        Emprendimiento nuevoEmprendimiento = Emprendimiento.builder()
+                .nombre(emprendimientoDTO.getNombre())
+                .descripcion(emprendimientoDTO.getDescripcion())
+                .year(emprendimientoDTO.getYear())
+                .inversion(emprendimientoDTO.getInversion()).build();
+
 
         Etapa nuevaEtapa = etapaService.buscarEtapaPorId(emprendimientoDTO.getIdEtapa());
         nuevoEmprendimiento.setEtapa(nuevaEtapa);
