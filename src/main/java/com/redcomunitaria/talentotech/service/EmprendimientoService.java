@@ -27,7 +27,9 @@ public class EmprendimientoService {
                 .nombre(emprendimientoDTO.getNombre())
                 .descripcion(emprendimientoDTO.getDescripcion())
                 .year(emprendimientoDTO.getYear())
-                .inversion(emprendimientoDTO.getInversion()).build();
+                .inversion(emprendimientoDTO.getInversion())
+                .ingresos(emprendimientoDTO.getIngresos())
+                .empleados(emprendimientoDTO.getEmpleados()).build();
 
 
         Etapa nuevaEtapa = etapaService.buscarEtapaPorId(emprendimientoDTO.getIdEtapa());

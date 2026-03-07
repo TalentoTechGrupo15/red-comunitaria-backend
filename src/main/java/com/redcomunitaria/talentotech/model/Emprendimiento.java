@@ -53,10 +53,10 @@ public class Emprendimiento {
     @JoinColumn(name = "id_equipo", nullable = false)
     private Equipo equipo;
 
-    @Column(nullable = false)
+    @Column
     private Double ingresos;
 
-    @Column(nullable = false)
+    @Column
     private Double empleados;
 
 }

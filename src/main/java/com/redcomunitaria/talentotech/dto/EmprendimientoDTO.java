@@ -18,4 +18,6 @@ public class EmprendimientoDTO {
     private Long idRegion;
     private Long idTipoEmprendimiento;
     private Long idEquipo;
+    private Double ingresos;
+    private Double empleados;
 }

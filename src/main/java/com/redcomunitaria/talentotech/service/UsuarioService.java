@@ -1,5 +1,5 @@
 package com.redcomunitaria.talentotech.service;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.redcomunitaria.talentotech.dto.EquipoDTO;
 import com.redcomunitaria.talentotech.dto.UsuarioDTO;
 import com.redcomunitaria.talentotech.exception.CedulaYaExisteExcepcion;
@@ -26,7 +26,7 @@ public class UsuarioService {
     private final RolService rolService;
     private final EquipoService equipoService;
 
-
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public Usuario crearUsuario(UsuarioDTO usuarioDTO) {
 
@@ -50,7 +50,7 @@ public class UsuarioService {
         nuevoUsuario.setEdad(usuarioDTO.getEdad());
         nuevoUsuario.setSexo(usuarioDTO.getSexo());
         nuevoUsuario.setUsuario(usuarioDTO.getUsuario());
-        nuevoUsuario.setClave(usuarioDTO.getClave());
+        nuevoUsuario.setClave(passwordEncoder.encode(usuarioDTO.getClave()));
         nuevoUsuario.setRol(rol);
 
 
