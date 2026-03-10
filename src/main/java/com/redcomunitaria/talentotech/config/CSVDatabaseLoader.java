@@ -1,4 +1,4 @@
-/*package com.redcomunitaria.talentotech.config;
+package com.redcomunitaria.talentotech.config;
 
 import com.redcomunitaria.talentotech.model.*;
 import com.redcomunitaria.talentotech.repository.*;
@@ -268,4 +268,4 @@ public class CSVDatabaseLoader implements CommandLineRunner {
         }
         if (!lote.isEmpty()) emprendimientoRepository.saveAll(lote);
     }
-}*/
+}
