@@ -15,7 +15,7 @@ public class UsuarioDTO {
 	private Integer cedula;
 	private String correo;
 	private Integer edad;
-	private String sexo;
+	private Long sexo;
 	private String usuario;
 	private String clave;
 }

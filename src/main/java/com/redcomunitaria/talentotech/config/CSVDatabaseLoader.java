@@ -198,7 +198,7 @@ public class CSVDatabaseLoader implements CommandLineRunner {
                 usuario.setCedula(Integer.parseInt(data[3]));
                 usuario.setCorreo(data[4]);
                 usuario.setEdad(Integer.parseInt(data[5]));
-                usuario.setSexo(data[6]);
+                //usuario.setSexo(data[6]);
                 usuario.setUsuario(data[7]);
                 usuario.setClave(passwordEncoder.encode(data[8]));
                 usuario.setRol(rol);
@@ -256,8 +256,8 @@ public class CSVDatabaseLoader implements CommandLineRunner {
                 emp.setRegion(region);
                 emp.setTipoEmprendimiento(tipo);
                 emp.setEquipo(equipo);
-                emp.setIngresos(Double.parseDouble(data[9]));
-                emp.setEmpleados(Double.parseDouble(data[10]));
+                //emp.setIngresos(Double.parseDouble(data[9]));
+                //emp.setEmpleados(Double.parseDouble(data[10]));
                 lote.add(emp);
 
                 if (lote.size() == BATCH_SIZE) {
