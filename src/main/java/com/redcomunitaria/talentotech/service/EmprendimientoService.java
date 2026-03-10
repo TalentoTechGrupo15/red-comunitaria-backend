@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,7 +55,21 @@ public class EmprendimientoService {
     }
 
     public List<Emprendimiento> buscarEmprendimiento(String nombre, Integer tipo, Integer pais, String agruparPor, Integer numeroResultados) {
-        List<Emprendimiento> emprendimientos = emprendimientoRepository.buscarConFiltros(nombre, tipo, pais, agruparPor);
+        List<Emprendimiento> emprendimientos = emprendimientoRepository.buscarConFiltros(nombre, tipo, pais);
+
+//        if ("pais".equalsIgnoreCase(agruparPor)) {
+//            return emprendimientos.stream()
+//                    .collect(Collectors.groupingBy(e -> e.getRegion().getPais().getIdPais()))
+//                    .values().stream()
+//                    .map(list -> list.get(0))
+//                    .toList();
+//        } else if ("region".equalsIgnoreCase(agruparPor)) {
+//            return emprendimientos.stream()
+//                    .collect(Collectors.groupingBy(e -> e.getRegion().getIdRegion()))
+//                    .values().stream()
+//                    .map(list -> list.get(0))
+//                    .toList();
+//        }
         return emprendimientos.stream().limit(numeroResultados).toList();
 
     }

@@ -17,6 +17,7 @@ public class EmprendimientoController {
 
     private final EmprendimientoService emprendimientoService;
 
+
     @PostMapping("/crear_emprendimiento")
     public ResponseEntity<Emprendimiento> crearEmprendimiento(@RequestBody EmprendimientoDTO emprendimientoDTO){
         Emprendimiento emp = emprendimientoService.crearEmprendimiento(emprendimientoDTO);
@@ -25,11 +26,11 @@ public class EmprendimientoController {
 
     @GetMapping("/buscar")
     public ResponseEntity<List<Emprendimiento>> buscar(
-            @RequestParam String nombre,
-            @RequestParam Integer tipo,
-            @RequestParam Integer pais,
-            @RequestParam String agruparPor,
-            @RequestParam Integer numeroResultados){
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) Integer tipo,
+            @RequestParam(required = false) Integer pais,
+            @RequestParam(required = false) String agruparPor,
+            @RequestParam(required = false, defaultValue = "10") Integer numeroResultados){
         List<Emprendimiento> emp = emprendimientoService.buscarEmprendimiento(nombre, tipo, pais, agruparPor, numeroResultados);
         return ResponseEntity.status(HttpStatus.OK).body(emp);
     }
