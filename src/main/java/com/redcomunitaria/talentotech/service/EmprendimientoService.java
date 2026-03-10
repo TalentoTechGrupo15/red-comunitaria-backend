@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @AllArgsConstructor
@@ -49,5 +51,11 @@ public class EmprendimientoService {
 
         equipoDelEmprendimiento.setEmprendimiento(nuevoEmprendimiento);
         return e;
+    }
+
+    public List<Emprendimiento> buscarEmprendimiento(String nombre, Integer tipo, Integer pais, String agruparPor, Integer numeroResultados) {
+        List<Emprendimiento> emprendimientos = emprendimientoRepository.buscarConFiltros(nombre, tipo, pais, agruparPor);
+        return emprendimientos.stream().limit(numeroResultados).toList();
+
     }
 }

@@ -1,10 +1,13 @@
 package com.redcomunitaria.talentotech.service;
 
+import com.redcomunitaria.talentotech.dto.RespuestaListaDTO;
 import com.redcomunitaria.talentotech.model.Region;
 import com.redcomunitaria.talentotech.repository.RegionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,5 +19,11 @@ public class RegionService {
     public Region buscarRegionPorId(Long idRegion){
         return regionRepository.findById(idRegion)
                 .orElseThrow(() -> new RuntimeException("Región no encontrada"));
+    }
+
+    public List<RespuestaListaDTO> obtenerRegiones() {
+        return regionRepository.findAll().stream()
+                .map(region -> new RespuestaListaDTO(region.getIdRegion(), region.getNombre()))
+                .toList();
     }
 }

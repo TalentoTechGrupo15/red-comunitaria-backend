@@ -8,6 +8,7 @@ import com.redcomunitaria.talentotech.exception.UsuarioYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.UsuarioYaTieneEquipoExcepcion;
 import com.redcomunitaria.talentotech.model.Equipo;
 import com.redcomunitaria.talentotech.model.Rol;
+import com.redcomunitaria.talentotech.model.Sexo;
 import com.redcomunitaria.talentotech.model.Usuario;
 import com.redcomunitaria.talentotech.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final RolService rolService;
     private final EquipoService equipoService;
+    private final SexoService sexoService;
 
 
 
@@ -48,7 +50,10 @@ public class UsuarioService {
         nuevoUsuario.setCedula(usuarioDTO.getCedula());
         nuevoUsuario.setCorreo(usuarioDTO.getCorreo());
         nuevoUsuario.setEdad(usuarioDTO.getEdad());
-        nuevoUsuario.setSexo(usuarioDTO.getSexo());
+
+        Sexo sexoUsuario = sexoService.obtenerSexoPorId(usuarioDTO.getSexo());
+        nuevoUsuario.setSexo(sexoUsuario);
+
         nuevoUsuario.setUsuario(usuarioDTO.getUsuario());
         nuevoUsuario.setClave(usuarioDTO.getClave());
         nuevoUsuario.setRol(rol);

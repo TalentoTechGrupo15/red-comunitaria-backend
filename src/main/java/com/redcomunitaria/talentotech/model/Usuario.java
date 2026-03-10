@@ -36,8 +36,7 @@ public class Usuario {
     @Column(nullable = false)
     private Integer edad;
 
-    @Column(nullable = false)
-    private String sexo;
+
 
     @Column(nullable = false, unique = true)
     private String usuario;
@@ -45,6 +44,10 @@ public class Usuario {
     @Column(nullable = false)
     private String clave;
 
+
+    @ManyToOne
+    @JoinColumn(name="id_sexo", nullable = false)
+    private Sexo sexo;
 
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
