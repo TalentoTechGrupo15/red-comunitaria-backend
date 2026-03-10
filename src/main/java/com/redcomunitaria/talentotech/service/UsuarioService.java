@@ -1,11 +1,14 @@
 package com.redcomunitaria.talentotech.service;
 
 import com.redcomunitaria.talentotech.dto.EquipoDTO;
+import com.redcomunitaria.talentotech.dto.LoginRequestDTO;
+import com.redcomunitaria.talentotech.dto.LoginResponseDTO;
 import com.redcomunitaria.talentotech.dto.UsuarioDTO;
 import com.redcomunitaria.talentotech.exception.CedulaYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.CorreoYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.UsuarioYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.UsuarioYaTieneEquipoExcepcion;
+import com.redcomunitaria.talentotech.jwt.JwtService;
 import com.redcomunitaria.talentotech.model.Equipo;
 import com.redcomunitaria.talentotech.model.Rol;
 import com.redcomunitaria.talentotech.model.Sexo;
@@ -28,9 +31,10 @@ public class UsuarioService {
     private final EquipoService equipoService;
     private final SexoService sexoService;
 
+    private final JwtService jwtService;
 
 
-    public Usuario crearUsuario(UsuarioDTO usuarioDTO) {
+    public LoginResponseDTO crearUsuario(UsuarioDTO usuarioDTO) {
 
         if(usuarioRepository.existsByUsuario(usuarioDTO.getUsuario())){
             throw new UsuarioYaExisteExcepcion("El nombre de usuario ya existe");
@@ -59,7 +63,14 @@ public class UsuarioService {
         nuevoUsuario.setRol(rol);
 
 
-        return usuarioRepository.save(nuevoUsuario);
+        Usuario usuarioRegistrado = usuarioRepository.save(nuevoUsuario);
+
+        return LoginResponseDTO.builder()
+                .usuario(usuarioRegistrado.getUsuario())
+                .idEmprendimiento(null)
+                .idEquipo(null)
+                .token(jwtService.getToken(usuarioRegistrado))
+                .build();
     }
 
 
@@ -99,4 +110,7 @@ public class UsuarioService {
 
     }
 
+    public LoginResponseDTO iniciarSesion(LoginRequestDTO loginRequestDTO) {
+    return null;
+    }
 }
