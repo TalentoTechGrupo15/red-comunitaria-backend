@@ -33,9 +33,14 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(us);
     }
 
-    @PostMapping("crear_equipo")
+    @PostMapping("/crear_equipo")
     public ResponseEntity<Equipo> crearEquipo(@RequestBody EquipoDTO equipoDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.crearEquipo(equipoDTO));
 
+    }
+
+    @GetMapping("/prueba")
+    public String prueba(){
+        return "Hola funcionó correctamente desde usuario";
     }
 }
