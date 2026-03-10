@@ -1,20 +1,18 @@
 package com.redcomunitaria.talentotech.service;
 
-import com.redcomunitaria.talentotech.dto.EquipoDTO;
-import com.redcomunitaria.talentotech.dto.LoginRequestDTO;
-import com.redcomunitaria.talentotech.dto.LoginResponseDTO;
-import com.redcomunitaria.talentotech.dto.UsuarioDTO;
+import com.redcomunitaria.talentotech.dto.*;
 import com.redcomunitaria.talentotech.exception.CedulaYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.CorreoYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.UsuarioYaExisteExcepcion;
 import com.redcomunitaria.talentotech.exception.UsuarioYaTieneEquipoExcepcion;
 import com.redcomunitaria.talentotech.jwt.JwtService;
-import com.redcomunitaria.talentotech.model.Equipo;
-import com.redcomunitaria.talentotech.model.Rol;
-import com.redcomunitaria.talentotech.model.Sexo;
-import com.redcomunitaria.talentotech.model.Usuario;
+import com.redcomunitaria.talentotech.model.*;
 import com.redcomunitaria.talentotech.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +28,39 @@ public class UsuarioService {
     private final RolService rolService;
     private final EquipoService equipoService;
     private final SexoService sexoService;
+    private final EmprendimientoService emprendimientoService;
 
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
+
+
+    public LoginResponseDTO iniciarSesion(LoginRequestDTO loginRequestDTO) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsuario(), loginRequestDTO.getClave()));
+        //UserDetails userDetails = usuarioRepository.findByUsuario(loginRequestDTO.getUsuario());
+
+        Usuario usuario = usuarioRepository.findByUsuario(loginRequestDTO.getUsuario());
+        if (usuario == null) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+        Long idEquipo = null;
+        Long idEmprendimiento = null;
+
+        if (usuario.getEquipo() != null) {
+            idEquipo = usuario.getEquipo().getIdEquipo();
+            if (usuario.getEquipo().getEmprendimiento() != null) {
+                idEmprendimiento = usuario.getEquipo().getEmprendimiento().getIdEmprendimiento();
+            }
+        }
+
+        return LoginResponseDTO.builder()
+                .usuario(usuario.getUsername())
+                .idEmprendimiento(idEmprendimiento)
+                .idEquipo(idEquipo)
+                .token(jwtService.getToken(usuario))
+                .build();
+    }
+
 
 
     public LoginResponseDTO crearUsuario(UsuarioDTO usuarioDTO) {
@@ -59,7 +88,7 @@ public class UsuarioService {
         nuevoUsuario.setSexo(sexoUsuario);
 
         nuevoUsuario.setUsuario(usuarioDTO.getUsuario());
-        nuevoUsuario.setClave(usuarioDTO.getClave());
+        nuevoUsuario.setClave(passwordEncoder.encode(usuarioDTO.getClave()));
         nuevoUsuario.setRol(rol);
 
 
@@ -110,7 +139,5 @@ public class UsuarioService {
 
     }
 
-    public LoginResponseDTO iniciarSesion(LoginRequestDTO loginRequestDTO) {
-    return null;
-    }
+
 }

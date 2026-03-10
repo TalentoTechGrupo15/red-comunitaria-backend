@@ -24,7 +24,7 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.iniciarSesion(loginRequestDTO));
+        return ResponseEntity.ok(usuarioService.iniciarSesion(loginRequestDTO));
     }
 
     @PostMapping("/registro")

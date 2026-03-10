@@ -27,7 +27,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http
+        return http
                 .csrf(csrf -> csrf.disable()) // si no se desactiva falla POST/PUT/DELETE
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/emprendimiento/buscar").permitAll()
@@ -38,14 +38,14 @@ public class SecurityConfig {
                         .requestMatchers("/sexo/listar").permitAll()
                         .requestMatchers("/tipo_emprendimiento/listar").permitAll()
                         .requestMatchers("/usuario/registro").permitAll()
+                        .requestMatchers("/usuario/login").permitAll()
                         .anyRequest().authenticated())
                 //.formLogin(form -> form.disable())
                 .sessionManagement(sessionManager ->
                         sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-                //.httpBasic(basic -> basic.disable());
-        return http.build();
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
 
     }
 }
