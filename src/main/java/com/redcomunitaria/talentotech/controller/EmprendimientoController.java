@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/emprendimiento")
 @AllArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EmprendimientoController {
 
     private final EmprendimientoService emprendimientoService;
@@ -34,4 +35,6 @@ public class EmprendimientoController {
         List<Emprendimiento> emp = emprendimientoService.buscarEmprendimiento(nombre, tipo, pais, agruparPor, numeroResultados);
         return ResponseEntity.status(HttpStatus.OK).body(emp);
     }
+
+
 }
