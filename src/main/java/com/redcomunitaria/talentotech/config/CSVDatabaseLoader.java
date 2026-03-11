@@ -1,10 +1,11 @@
-/*package com.redcomunitaria.talentotech.config;
+package com.redcomunitaria.talentotech.config;
 
 import com.redcomunitaria.talentotech.model.*;
 import com.redcomunitaria.talentotech.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -28,7 +29,7 @@ public class CSVDatabaseLoader implements CommandLineRunner {
     @Autowired private EquipoRepository equipoRepository;
     @Autowired private UsuarioRepository usuarioRepository;
     @Autowired private EmprendimientoRepository emprendimientoRepository;
-    @Autowired private BCryptPasswordEncoder passwordEncoder;
+    @Autowired private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -268,4 +269,4 @@ public class CSVDatabaseLoader implements CommandLineRunner {
         }
         if (!lote.isEmpty()) emprendimientoRepository.saveAll(lote);
     }
-}*/
+}
