@@ -27,7 +27,7 @@ public class Emprendimiento {
     private String descripcion;
 
 
-    private Date year;
+    private Integer year;
 
     @Column(nullable = false)
     private Double inversion;

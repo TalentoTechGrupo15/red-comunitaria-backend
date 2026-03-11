@@ -251,7 +251,7 @@ public class CSVDatabaseLoader implements CommandLineRunner {
                 Emprendimiento emp = new Emprendimiento();
                 emp.setNombre(data[1]);
                 emp.setDescripcion(data[2]);
-                emp.setYear(new Date());
+                emp.setYear(Integer.valueOf(data[3]));
                 emp.setInversion(Double.parseDouble(data[4]));
                 emp.setEtapa(etapa);
                 emp.setRegion(region);

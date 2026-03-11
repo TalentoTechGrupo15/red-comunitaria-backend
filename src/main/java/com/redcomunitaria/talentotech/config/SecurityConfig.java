@@ -30,6 +30,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable()) // si no se desactiva falla POST/PUT/DELETE
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/emprendimiento/buscar/**").permitAll()
                         .requestMatchers("/emprendimiento/buscar").permitAll()
                         .requestMatchers("/etapa/listar").permitAll()
                         .requestMatchers("/pais/listar").permitAll()
@@ -39,6 +40,8 @@ public class SecurityConfig {
                         .requestMatchers("/tipo_emprendimiento/listar").permitAll()
                         .requestMatchers("/usuario/registro").permitAll()
                         .requestMatchers("/usuario/login").permitAll()
+                        .requestMatchers("/equipo/buscar/**").permitAll()
+                        .requestMatchers("/equipo/buscar").permitAll()
                         .anyRequest().authenticated())
                 //.formLogin(form -> form.disable())
                 .sessionManagement(sessionManager ->
