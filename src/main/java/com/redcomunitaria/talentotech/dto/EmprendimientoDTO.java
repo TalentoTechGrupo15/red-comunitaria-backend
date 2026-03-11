@@ -12,7 +12,7 @@ import lombok.Setter;
 public class EmprendimientoDTO {
     private String nombre;
     private String descripcion;
-    private java.util.Date year;
+    private Integer year;
     private Double inversion;
     private Long idEtapa;
     private Long idRegion;
