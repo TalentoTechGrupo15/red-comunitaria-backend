@@ -49,7 +49,7 @@ public class Usuario  implements UserDetails {
 
 
     @ManyToOne
-    @JoinColumn(name="id_sexo", nullable = false)
+    @JoinColumn(name="id_sexo")
     private Sexo sexo;
 
     @ManyToOne
