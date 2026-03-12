@@ -39,8 +39,4 @@ public class UsuarioController {
 
     }
 
-    @GetMapping("/prueba")
-    public String prueba(){
-        return "Hola funcionó correctamente desde usuario";
-    }
 }
