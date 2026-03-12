@@ -30,9 +30,10 @@ public class EmprendimientoController {
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) Integer tipo,
             @RequestParam(required = false) Integer pais,
+            @RequestParam(required = false) Integer etapa,
             @RequestParam(required = false) String agruparPor,
             @RequestParam(required = false, defaultValue = "10") Integer numeroResultados){
-        List<Emprendimiento> emp = emprendimientoService.buscarEmprendimiento(nombre, tipo, pais, agruparPor, numeroResultados);
+        List<Emprendimiento> emp = emprendimientoService.buscarEmprendimiento(nombre, tipo, etapa, pais, agruparPor, numeroResultados);
         return ResponseEntity.status(HttpStatus.OK).body(emp);
     }
 

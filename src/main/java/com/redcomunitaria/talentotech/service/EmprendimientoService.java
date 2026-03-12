@@ -57,8 +57,8 @@ public class EmprendimientoService {
         return e;
     }
 
-    public List<Emprendimiento> buscarEmprendimiento(String nombre, Integer tipo, Integer pais, String agruparPor, Integer numeroResultados) {
-        List<Emprendimiento> emprendimientos = emprendimientoRepository.buscarConFiltros(nombre, tipo, pais);
+    public List<Emprendimiento> buscarEmprendimiento(String nombre, Integer tipo, Integer etapa, Integer pais, String agruparPor, Integer numeroResultados) {
+        List<Emprendimiento> emprendimientos = emprendimientoRepository.buscarConFiltros(nombre, tipo, etapa, pais);
 
 //        if ("pais".equalsIgnoreCase(agruparPor)) {
 //            return emprendimientos.stream()
